@@ -7,7 +7,7 @@ HatPersistence.static.ALL_MODELS = "BaseItem"
 HatPersistence.static.ALL_CSS_MODELS = "CS:S Models"
 
 HatPersistence.static.model = {
-	tableName = "ps2_HatPersistence",
+	tableName = "ps2_hatpersistence",
 	fields = {
 		itemPersistenceId = "int",
 		iconInfo = "luadata",

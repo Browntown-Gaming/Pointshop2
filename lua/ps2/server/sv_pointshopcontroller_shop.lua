@@ -187,7 +187,7 @@ function Pointshop2Controller:handleItemUnequip( item, ply, slotName )
     
     local players = {}
     for k, v in pairs( player.GetAll() ) do
-        if getPromiseState( v.fullyLoadedPromise ) != "done" then
+        if getPromiseState( v.fullyLoadedPromise ) != "resolved" then
             continue
         end
         
@@ -259,7 +259,9 @@ function Pointshop2Controller:sellItems( ply, itemIds )
     local validSale = Promise.Resolve( )
     local items = { }
     for k, itemId in pairs( itemIds ) do
+		print("itemId = "..itemId)
         local item = KInventory.ITEMS[itemId]
+		PrintTable(item)
         table.insert( items, item )
         validSale = validSale:Then( function()
             if Pointshop2.GetSlotContainingItemId( ply, item.id ) then

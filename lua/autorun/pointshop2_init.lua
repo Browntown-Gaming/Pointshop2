@@ -20,14 +20,27 @@ end
 addCsLuaRecursive( "ps2/modules" )
 LibK.AddCSLuaDir( "kinv/items" )
 
-LibK.InitializeAddon{
-	addonName = "Pointshop2",             --Name of the addon
-	author = "Kamshak",                   --Name of the author
-	luaroot = "ps2",                      --Folder that contains the client/shared/server structure relative to the lua folder,
-	loadAfterGamemode = false,
-	version = "2.26.0",
-	requires = { "KInventory" }
-}
-
-LibK.addReloadFile( "autorun/pointshop2_init.lua" )
-print( Format( "Pointshop2 Version %s : %s loaded", "{{ script_id }}", "{{ user_id }}" ) )
+local function initAddon()
+	LibK.InitializeAddon{
+		addonName = "Pointshop2",             --Name of the addon
+		author = "Kamshak",                   --Name of the author
+		luaroot = "ps2",                      --Folder that contains the client/shared/server structure relative to the lua folder,
+		loadAfterGamemode = false,
+		version = "2.26.0",
+		requires = { "KInventory" }
+	}
+	LibK.addReloadFile( "autorun/pointshop2_init.lua" )
+	print( Format( "Pointshop2 Version %s : %s loaded", "{{ script_id }}", "{{ user_id }}" ) )
+end
+if CLIENT then 
+	initAddon() 
+elseif SERVER then
+	PS_LOADED = false
+	hook.Add("Think","PS.InitAddonOnThink",function()
+		if not PS_LOADED then
+			print("Loading Pointshop2")
+			PS_LOADED = true
+			initAddon()
+		end
+	end)
+end

@@ -11,8 +11,12 @@ function ITEM:AttachTrail( )
 		if hook.Run( "PS2_VisualsShouldShow", self:GetOwner( ) ) == false then
 			return
 		end
-
 		local ply = self:GetOwner()
+		
+		if ply:GetNWBool("disguised", false) == true then
+			return
+		end
+
 		if (ply.IsSpec and ply:IsSpec()) then
 			return
 		end

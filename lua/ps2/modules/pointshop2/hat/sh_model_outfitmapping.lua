@@ -4,7 +4,7 @@ local OutfitHatPersistenceMapping = Pointshop2.OutfitHatPersistenceMapping
 OutfitHatPersistenceMapping.static.DB = "Pointshop2"
 
 OutfitHatPersistenceMapping.static.model = {
-	tableName = "ps2_OutfitHatPersistenceMapping",
+	tableName = "ps2_outfithatpersistencemapping",
 	fields = {
 		hatPersistenceId = "int",
 		outfitId = "int",

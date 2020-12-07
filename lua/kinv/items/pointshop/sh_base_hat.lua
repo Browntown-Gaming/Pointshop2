@@ -15,8 +15,6 @@ if CLIENT then
 	function ITEM:AttachOutfit( )
 		local ply = self:GetOwner( )
 		if not IsValid(ply) then
-			debug.Trace( )
-			PrintTable( self )
 			return
 		end
 
@@ -25,6 +23,10 @@ if CLIENT then
 		end
 
 		if hook.Run( "PS2_VisualsShouldShow", ply ) == false then
+			return
+		end
+		
+		if ply:GetNWBool("disguised", false) == true then
 			return
 		end
 
@@ -86,10 +88,6 @@ else
 			return
 		end
 
-		if ply.IsGhost and ply:IsGhost() then
-			return
-		end
-
 		if ply == self:GetOwner( ) then
 			timer.Simple( 0.5, function( )
 				self:ClientRPC( "AttachOutfit" )
@@ -128,10 +126,6 @@ function ITEM:OnEquip( )
 	end
 
 	if ply.IsSpec and ply:IsSpec() then
-		return
-	end
-
-	if ply.IsGhost and ply:IsGhost() then
 		return
 	end
 

@@ -32,6 +32,10 @@ function ITEM:ApplyModel( )
 	if hook.Run( "PS2_PlayermodelShouldShow", ply, self ) == false then
 		return
 	end
+	
+	if ply:GetNWBool("disguised", false) == true then
+		return
+	end
 
 	ply:SetModel( self.playerModel )
 	ply:SetupHands()
